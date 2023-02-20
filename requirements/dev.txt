@@ -1,0 +1,6 @@
+pytest-env
+black
+python-dotenv
+httpx
+pytest
+pylint

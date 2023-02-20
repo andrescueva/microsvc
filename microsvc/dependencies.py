@@ -20,7 +20,7 @@ def is_api_key_valid(x_parse_rest_api_key: str):
     return True
 
 
-def create_jwt(transaction_id: int):
+def create_jwt(transaction_id: int) -> str:
     """create jwt token"""
     transaction_ids.append(transaction_id)
     payload = {"transaction_id": transaction_id}
@@ -28,7 +28,7 @@ def create_jwt(transaction_id: int):
     return jwt_token
 
 
-def is_valid_token(token: str):
+def is_valid_token(token: str) -> bool :
     """check is token is valid"""
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -39,7 +39,7 @@ def is_valid_token(token: str):
         return False
 
 
-def invalidate_token(token: str):
+def invalidate_token(token: str) -> None:
     """remove transaction id from list of current ids"""
     payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
     transaction_id = payload["transaction_id"]
@@ -48,11 +48,14 @@ def invalidate_token(token: str):
 
 class IdGenerator():
     """Generator id autoincremental"""
-    def __iter__(self) -> None:
+    def __init__(self):\
         self.count = 0
+
+
+    def __iter__(self) -> None:
         return self
 
-    def __next__(self):
+    def __next__(self) -> int:
         counter =  self.count
         self.count += 1
         return counter

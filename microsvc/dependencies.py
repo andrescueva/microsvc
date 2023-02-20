@@ -48,7 +48,7 @@ def invalidate_token(token: str) -> None:
 
 class IdGenerator():
     """Generator id autoincremental"""
-    def __init__(self):\
+    def __init__(self):
         self.count = 0
 
 

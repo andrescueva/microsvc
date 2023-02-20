@@ -1,0 +1,54 @@
+name: CD
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to deploy'
+        required: true
+env:
+
+  ECS_SERVICE: microsvc
+  ECS_CLUSTER: ecs
+  ECS_TASK_DEFINITION: .aws/task-definition.json
+  CONTAINER_NAME: microsvc
+
+jobs:
+
+
+
+  deploy:
+    name: Deploy container to ECS service
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ vars.AWS_REGION }}
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      env:
+        IMAGE: ${{ secrets.ECR_REPOSITORY_URL }}:${{ inputs.tag }}
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: ${{ env.ECS_TASK_DEFINITION }}
+        container-name: ${{ env.CONTAINER_NAME }}
+        image: ${{ env.IMAGE }}
+        environment-variables: |
+          API_KEY=${{ secrets.API_KEY }}
+          SECRET_KEY=${{ secrets.SECRET_KEY }}
+          ALGORITHM=${{ vars.ALGORITHM }}
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ env.ECS_SERVICE }}
+        cluster: ${{ env.ECS_CLUSTER }}
+        wait-for-service-stability: true

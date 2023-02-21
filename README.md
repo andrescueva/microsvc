@@ -2,7 +2,7 @@
 
 ![Architecture](./images/architecture.png)
 
-## endpoints:
+## Endpoints
 - get /docs: openapi spec
 - get /jwt: get jwt token
 - get /health: health check
@@ -10,7 +10,7 @@
 
 ## Pipelines
 - CI - microsvc/.github/workflows/ci.yml: runs lint, test and build (on tag) container image.
-- CD - microsvc/.github/workflows/ci.yml: manual execution with tag name as input to deploy container to ECS service
+- CD - microsvc/.github/workflows/ci.yml: manual execution with tag name as input to deploy container to ECS service.
 
 ## Repository secrets
 - API_KEY: key for protect endpoint DevOps

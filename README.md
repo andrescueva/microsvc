@@ -9,8 +9,8 @@
 ## Repository secrets
 - API_KEY: key for protect endpoint DevOps
 - SECRET_KEY : secret for jwt token
-- AWS_ACCESS_KEY_ID: self explanatory
-- AWS_SECRET_ACCESS_KEY: seld explanatory
+- AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
 - ECR_REPOSITORY_URL: registry 
 
 

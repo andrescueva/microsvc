@@ -1,11 +1,12 @@
 # microsvc app
 
 ![Architecture](./images/architecture.png)
-# endpoints:
-- /docs: openapi spec
-- /jwt: get jwt token
-- /health: health check
-- /DevOps: send messages
+
+## endpoints:
+- get /docs: openapi spec
+- get /jwt: get jwt token
+- get /health: health check
+- post /DevOps: send messages
 
 ## Pipelines
 - CI - microsvc/.github/workflows/ci.yml: runs lint, test and build (on tag) container image.

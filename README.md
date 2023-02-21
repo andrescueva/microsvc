@@ -19,5 +19,5 @@
 
 
 ## infrastructure as code
-Repo for building all the cloud infgrastructure in AWS: https://github.com/andrescueva/microsvc-infra
+Repo for building all the cloud infrastructure in AWS: https://github.com/andrescueva/microsvc-infra
 

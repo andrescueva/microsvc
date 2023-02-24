@@ -10,7 +10,7 @@ from microsvc.dependencies import (
 from microsvc.dependencies import IdGenerator
 
 
-
+# id for transactions
 id_generator = iter(IdGenerator())
 
 app = FastAPI()

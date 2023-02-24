@@ -10,7 +10,7 @@ API_KEY = os.getenv("API_KEY")
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 
-
+#records of transactions id
 transaction_ids = []
 
 def is_api_key_valid(x_parse_rest_api_key: str):
@@ -29,7 +29,7 @@ def create_jwt(transaction_id: int) -> str:
 
 
 def is_valid_token(token: str) -> bool :
-    """check is token is valid"""
+    """check if token is valid"""
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         transaction_id = payload["transaction_id"]
